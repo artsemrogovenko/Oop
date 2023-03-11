@@ -3,13 +3,14 @@ package Persons;
 import java.util.Random;
 
 /** нейтральный персонаж */
-public class BaseHero { // нейтральный персонаж
+public class BaseHero implements HeroInterface{ // нейтральный персонаж
     // например бот или наблюдатель
     protected String name; // имя
     protected String status;// живой, нет , наблюдатель
     protected int speed; // подвижность
-    protected int id;
+    private final int id;
     protected int[] position = { 0, 0 };
+    private static int count;
 
     public BaseHero(String name, String status, int speed) {
         this.name = name;
@@ -17,6 +18,12 @@ public class BaseHero { // нейтральный персонаж
         this.speed = speed;
         this.position[0] = random(0, 10);
         this.position[1] = random(0, 10);
+        count++;
+        this.id = count;
+    }
+
+    public String getStatus(){
+        return this.status;
     }
 
     public int random(int min, int max) {
@@ -24,9 +31,9 @@ public class BaseHero { // нейтральный персонаж
         return r.nextInt(max - min) + min;
     }
 
-    public void getInfo() {
-        System.out.println(String.format("%s статус %s id %d",
-        this.name, this.status,++this.id)); 
+    public String Info() {
+        return(String.format(" %s статус-%s id:%d",
+        this.name, this.status,+this.id)); 
     }
 
     public double distance(int newx, int newy) { //
@@ -41,6 +48,13 @@ public class BaseHero { // нейтральный персонаж
     //     System.out.println("время для новой позиции" + distance(setx, sety) / this.speed);
     // }
 
+    @Override
+    public void step() {
+    }
 
+    @Override
+    public String getinfo() {
+        return "";
+    }
     
 }

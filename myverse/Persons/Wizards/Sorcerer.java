@@ -7,5 +7,10 @@ public class Sorcerer extends Peasant{
     public Sorcerer(String name) {
         super(name, 2, "магический фокус");
     }
+
+    @Override
+    public String getinfo() {
+       return "колдун";
+    }
     
 }

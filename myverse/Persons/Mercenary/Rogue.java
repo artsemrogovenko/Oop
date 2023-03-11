@@ -5,6 +5,15 @@ import Persons.Peasant;
 public class Rogue extends Peasant {
 
     public Rogue(String name) {
-        super(name, 8, "мачете");
+        super(name, 6, "мачете");
+    }
+    @Override
+    public String getinfo() {
+       return "разбойник";
+    }
+
+    @Override 
+    public void step(){
+        System.out.println("нападает");
     }
 }
