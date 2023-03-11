@@ -1,5 +1,8 @@
 package Persons.Mercenary;
 
+import java.util.ArrayList;
+
+import Persons.BaseHero;
 import Persons.Peasant;
 /**разбойник  */
 public class Rogue extends Peasant {
@@ -13,7 +16,7 @@ public class Rogue extends Peasant {
     }
 
     @Override 
-    public void step(){
+    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam){
         System.out.println("нападает");
     }
 }

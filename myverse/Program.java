@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Random;
 
 import Persons.*;
@@ -70,6 +71,27 @@ public class Program {
         System.out.println("*****Команда 2******");
         for (BaseHero heroes : list2) {
             System.out.println(heroes.getinfo());
+        }
+
+        /**семинар2  */
+        ArrayList<BaseHero> result = new ArrayList<>();
+        result.addAll(list);
+        result.addAll(list2);
+        result.sort(new Comparator<BaseHero>() { //сортировать по скорости ..
+            @Override
+            public int compare(BaseHero b1, BaseHero b2) {
+                return (b2.getSpeed() - b1.getSpeed());
+            }
+        });
+        result.forEach(n -> System.out.print(n.getSpeed()+" "));// .. и вывести на экран
+        System.out.println();
+        //result.forEach(n->n.step());
+
+        for (BaseHero hero : result) { // выстрелить по тем у кто жив и есть ли стрелы
+            if (list.contains(hero)) {
+                hero.step(list2, list);
+            } else
+                hero.step(list, list2);
         }
     }
 

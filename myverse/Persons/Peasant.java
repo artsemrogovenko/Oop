@@ -1,5 +1,7 @@
 package Persons;
 
+import java.util.ArrayList;
+
 /** крестьянин */
 public class Peasant extends BaseHero { 
     protected int hp;
@@ -54,6 +56,10 @@ public class Peasant extends BaseHero {
 @Override
 public String getinfo(){
     return "крестьянин";
+}
+
+@Override
+public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
 }
 
 }

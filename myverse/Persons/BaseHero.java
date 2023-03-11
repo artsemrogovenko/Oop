@@ -1,9 +1,10 @@
 package Persons;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /** нейтральный персонаж */
-public class BaseHero implements HeroInterface{ // нейтральный персонаж
+public abstract class BaseHero implements HeroInterface{ // нейтральный персонаж
     // например бот или наблюдатель
     protected String name; // имя
     protected String status;// живой, нет , наблюдатель
@@ -32,7 +33,7 @@ public class BaseHero implements HeroInterface{ // нейтральный пер
     }
 
     public String Info() {
-        return(String.format(" %s статус-%s id:%d",
+        return(String.format("%s статус-%s id:%d",
         this.name, this.status,+this.id)); 
     }
 
@@ -49,12 +50,37 @@ public class BaseHero implements HeroInterface{ // нейтральный пер
     // }
 
     @Override
-    public void step() {
+    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
     }
 
     @Override
     public String getinfo() {
         return "";
     }
-    
+
+
+    public String getName() {
+        return name;
+    }
+
+
+    public int getSpeed() {
+        return speed;
+    }
+
+
+    public int getId() {
+        return id;
+    }
+
+
+    public int[] getPosition() {
+        return position;
+    }
+
+
+    public static int getCount() {
+        return count;
+    }
+
 }
