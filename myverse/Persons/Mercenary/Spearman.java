@@ -6,9 +6,13 @@ import Persons.BaseHero;
 import Persons.Peasant;
 /**копейщик  */
 public class Spearman extends Peasant {
-
+    private int power=random(1,3);
     public Spearman(String name) {
-        super(name, 8, "копьё");
+        super(name, 4, "копьё");
+        super.kevlar=5;
+        super.hp=10;
+        super.maxHp=10;
+        super.attacks=4;
     }
     @Override
     public String getinfo() {

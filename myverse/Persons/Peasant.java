@@ -4,36 +4,44 @@ import java.util.ArrayList;
 
 /** крестьянин */
 public class Peasant extends BaseHero { 
-    protected int hp;
     protected int maxHp;
     protected int money;
     protected String ammo;
     protected int patrons;
     protected int kevlar;
-
+    protected int attacks;
+    private int delivery=1;
+    private int power=1;
+    
     public Peasant(String name){
-        this(name, 8, "кирка");
+        this(name, 3, "кирка");
+        this.kevlar=1;
+        this.hp=1;
+        this.maxHp=1;
+        this.attacks=1;
     }
 
     public Peasant(String name, int speed, String ammo) {
         super(name, "Жив", speed);
         this.ammo = ammo;
-        this.hp=100;
-        this.maxHp=100;
+        //this.hp=100;
+        //this.maxHp=100;
         this.money=0;
         this.kevlar = 0;
         this.patrons=2;
         }
 
-    public void info(){
-        System.out.println(String.format("%s= здоровье: %d, патроны %d,оружие: %s, броня: %d",
-        this.name,this.hp,this.patrons, this.ammo,this.kevlar));
+
+    public String advinfo(){
+        return String.format("%s= здоровье: %d, патроны %d,оружие: %s, броня: %d",
+        this.name,this.hp,this.patrons, this.ammo,this.kevlar);
+        // return(String.format("%s статус-%s id:%d",
+        // super.name,super.status,getId())); 
     }
 
-    public void attack(BaseHero target) {
-        System.out.println(this.name+" атакует "+target.name);
-        int damage =random(10, 20);
-        ((Peasant) target).getDamage(damage);   
+    public void attack(BaseHero target,int value) {
+        //System.out.println(this.name+" атакует "+target.getName());       
+        ((Peasant) target).getDamage(value);   //враг получает урон
         --this.patrons;
     }
 
@@ -41,7 +49,7 @@ public class Peasant extends BaseHero {
         if (this.hp - damage > 0) {
             this.hp -= damage;
         }
-        // else { die(); }
+         else die(); 
     }
 
     protected void addHp(int addHp) {
@@ -50,6 +58,7 @@ public class Peasant extends BaseHero {
 
     protected void die() {
         super.status = "dead"; 
+        super.hp=0;
     }
 
 

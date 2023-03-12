@@ -42,35 +42,48 @@ public class Program {
         В main пройти по спискам и вызвать у всех персонажей getInfo. */
         ArrayList<BaseHero> list = new ArrayList<>();
         ArrayList<BaseHero> list2 = new ArrayList<>();     
+        // for (int i = 0; i < 10; i++) {
+        //     switch (new Random().nextInt(6)) {
+        //         case 0: list.add(new Peasant(setNames())); break;
+        //         case 1: list.add(new Sorcerer(setNames())); break;
+        //         case 2: list.add(new Rogue(setNames())); break;
+        //         case 3: list.add(new Spearman(setNames())); break;
+        //         case 4: list.add(new Crossbowman(setNames())); break;
+        //         case 5: list.add(new Monk(setNames())); break;
+        //         default:list.add(new Sniper(setNames())); break;
+        //     }
+        //     switch (new Random().nextInt(6)) {
+        //         case 0: list2.add(new Peasant(setNames())); break;
+        //         case 1: list2.add(new Sorcerer(setNames())); break;
+        //         case 2: list2.add(new Rogue(setNames())); break;
+        //         case 3: list2.add(new Spearman(setNames())); break;
+        //         case 4: list2.add(new Crossbowman(setNames())); break;
+        //         case 5: list2.add(new Monk(setNames())); break;
+        //         default:list2.add(new Sniper(setNames())); break;
+        //     }
+        // }
         for (int i = 0; i < 10; i++) {
-            switch (new Random().nextInt(6)) {
+            switch (new Random().nextInt(4)) {
                 case 0: list.add(new Peasant(setNames())); break;
                 case 1: list.add(new Sorcerer(setNames())); break;
                 case 2: list.add(new Rogue(setNames())); break;
-                case 3: list.add(new Spearman(setNames())); break;
-                case 4: list.add(new Crossbowman(setNames())); break;
-                case 5: list.add(new Monk(setNames())); break;
-                default:list.add(new Sniper(setNames())); break;
+                case 3: list.add(new Sniper(setNames())); break;
             }
-            switch (new Random().nextInt(6)) {
+            switch (new Random().nextInt(4)) {
                 case 0: list2.add(new Peasant(setNames())); break;
-                case 1: list2.add(new Sorcerer(setNames())); break;
-                case 2: list2.add(new Rogue(setNames())); break;
-                case 3: list2.add(new Spearman(setNames())); break;
-                case 4: list2.add(new Crossbowman(setNames())); break;
-                case 5: list2.add(new Monk(setNames())); break;
-                default:list2.add(new Sniper(setNames())); break;
+                case 1: list2.add(new Spearman(setNames())); break;
+                case 2: list2.add(new Crossbowman(setNames())); break;
+                case 3: list2.add(new Monk(setNames())); break;                
             }
         }
-
         System.out.println("*****Команда 1******");
         for (BaseHero heroes : list) {
-            System.out.println(heroes.getinfo());
+            System.out.println(heroes.getinfo()+" id:"+heroes.getId());
         }
 
         System.out.println("*****Команда 2******");
         for (BaseHero heroes : list2) {
-            System.out.println(heroes.getinfo());
+            System.out.println(heroes.getinfo()+" id:"+heroes.getId());
         }
 
         /**семинар2  */
@@ -83,8 +96,9 @@ public class Program {
                 return (b2.getSpeed() - b1.getSpeed());
             }
         });
-        result.forEach(n -> System.out.print(n.getSpeed()+" "));// .. и вывести на экран
-        System.out.println();
+        result.forEach(n -> System.out.printf("%s скор. %10s %30s    коорд. %s\n",
+        n.getSpeed(),n.getinfo(),n.Info(),n.showPos()));// .. и вывести на экран
+        
         //result.forEach(n->n.step());
 
         for (BaseHero hero : result) { // выстрелить по тем у кто жив и есть ли стрелы
@@ -93,6 +107,8 @@ public class Program {
             } else
                 hero.step(list, list2);
         }
+       
+        GameArea.showArea(result);
     }
 
 
