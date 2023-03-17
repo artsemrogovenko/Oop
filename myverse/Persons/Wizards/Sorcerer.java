@@ -1,17 +1,13 @@
 package Persons.Wizards;
-
-import Persons.Peasant;
 /**колдун */
-public class Sorcerer extends Peasant{
-    private final int mana=1;
+public class Sorcerer extends Wizards{
+
     private int power=-5;
     
-    public Sorcerer(String name) {
-        super(name, 9, "магический фокус");
-        super.kevlar=12;
-        super.hp=30;
-        super.maxHp=30;
-        super.attacks=17;
+    public Sorcerer(String name,int x,int y) {
+        super(name, 9, "магический фокус", x, y);
+        this.kevlar=12;
+        this.attacks=17; 
     }
 
     @Override

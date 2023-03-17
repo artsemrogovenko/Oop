@@ -62,18 +62,19 @@ public class Program {
         //         default:list2.add(new Sniper(setNames())); break;
         //     }
         // }
+       
         for (int i = 0; i < 10; i++) {
             switch (new Random().nextInt(4)) {
-                case 0: list.add(new Peasant(setNames())); break;
-                case 1: list.add(new Sorcerer(setNames())); break;
-                case 2: list.add(new Rogue(setNames())); break;
-                case 3: list.add(new Sniper(setNames())); break;
+                case 0: list.add(new Peasant(setNames(),i,0)); break;
+                case 1: list.add(new Sorcerer(setNames(),i,0)); break;
+                case 2: list.add(new Rogue(setNames(),i,0)); break;
+                case 3: list.add(new Sniper(setNames(),i,0)); break;
             }
             switch (new Random().nextInt(4)) {
-                case 0: list2.add(new Peasant(setNames())); break;
-                case 1: list2.add(new Spearman(setNames())); break;
-                case 2: list2.add(new Crossbowman(setNames())); break;
-                case 3: list2.add(new Monk(setNames())); break;                
+                case 0: list2.add(new Peasant(setNames(),i,9)); break;
+                case 1: list2.add(new Spearman(setNames(),i,9)); break;
+                case 2: list2.add(new Crossbowman(setNames(),i,9)); break;
+                case 3: list2.add(new Monk(setNames(),i,9)); break;                
             }
         }
         System.out.println("*****Команда 1******");
@@ -108,7 +109,7 @@ public class Program {
                 hero.step(list, list2);
         }
        
-        GameArea.showArea(result);
+        Positions.showArea(result);
     }
 
 

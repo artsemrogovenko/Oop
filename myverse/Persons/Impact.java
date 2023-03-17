@@ -1,14 +1,8 @@
 package Persons;
-import java.lang.reflect.Array;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Queue;
-import java.util.SortedMap;
 
 public class Impact {
  
@@ -22,8 +16,8 @@ public class Impact {
         }
 
         result.entrySet().stream() //сортировка по растоянию
-        .sorted(Map.Entry.<Double, Integer>comparingByKey())//.reversed())        
-        .forEach(System.out::println); // вывод растояние = id
+        .sorted(Map.Entry.<Double, Integer>comparingByKey());//.reversed())        
+        //.forEach(System.out::println); // вывод растояние = id
         
         Map.Entry<Double, Integer> minEntry = result.entrySet().stream()// поиск наименьшего ключа
         .min(Comparator.comparing(Map.Entry::getKey))
@@ -32,7 +26,7 @@ public class Impact {
 
         for (BaseHero i : team) {// выбор обьекта по id
             if(minEntry.getValue()==i.getId()){               
-                System.out.println("ближайший " + i.getId());
+                System.out.println("ближайший id " + i.getId());
                 return i;
             }
         }        

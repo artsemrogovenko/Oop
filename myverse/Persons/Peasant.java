@@ -13,15 +13,16 @@ public class Peasant extends BaseHero {
     private int delivery=1;
     private int power=1;
     
-    public Peasant(String name){
-        this(name, 3, "кирка");
+    public Peasant(String name,int x,int y){
+        this(name, 3, "кирка",x,y);
         this.kevlar=1;
         this.hp=1;
         this.maxHp=1;
         this.attacks=1;
+        //super.position=new Positions(10);
     }
 
-    public Peasant(String name, int speed, String ammo) {
+    public Peasant(String name, int speed, String ammo,int x,int y) {
         super(name, "Жив", speed);
         this.ammo = ammo;
         //this.hp=100;
@@ -29,6 +30,7 @@ public class Peasant extends BaseHero {
         this.money=0;
         this.kevlar = 0;
         this.patrons=2;
+        super.position=new Positions(x,y);
         }
 
 
@@ -71,4 +73,8 @@ public String getinfo(){
 public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
 }
 
+@Override
+public int showPower() {
+    return power;
+}
 }

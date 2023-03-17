@@ -1,16 +1,15 @@
 package Persons.Wizards;
 
-import Persons.Peasant;
+import Persons.Positions;
+
 /**монах */
-public class Monk extends Peasant {
-   private final int mana=1;
+public class Monk extends Wizards {
    private int power=-4;
-   public Monk(String name) {
-      super(name, 5, "дротики");
-      super.kevlar=7;
-      super.hp=30;
-      super.maxHp=30;
-      super.attacks=17;
+   
+   public Monk(String name,int x,int y) {
+      super(name, 5, "дротики",x, y);
+      this.kevlar=7;
+      this.attacks=17;
    }
 
    @Override

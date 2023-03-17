@@ -33,7 +33,7 @@ public class GameArea {
             System.out.printf("\n------------------------------\n");
             for (int y = 0; y < 10; y++) {     //столбцы
                 for (int i = 0; i < teams.size(); i++) {//пробежаться по списку на совпадение координат
-                    if (teams.get(i).position[0] == x && teams.get(i).position[1] == y) {
+                    if (teams.get(i).position.getPos()[0] == x && teams.get(i).position.getPos()[1] == y) {
                         System.out.printf("%-2d",teams.get(i).getId());
                         empty=false;
                         break;

@@ -2,6 +2,9 @@ package Persons;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Random;
 /** нейтральный персонаж */
 public abstract class BaseHero implements HeroInterface{ // нейтральный персонаж
@@ -11,7 +14,7 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
     protected String status;// живой, нет , наблюдатель
     protected int speed; // подвижность
     private final int id;
-    protected int[] position = { 0, 0 };
+    protected Positions position;
     private static int count;
     protected int hp;
 
@@ -19,21 +22,10 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
         this.name = name;
         this.status = status;
         this.speed = speed;
-        placeHero();
         count++;
         this.id = count;
     }
 
-    public void placeHero(){
-        this.position[0] = random(0, 10);
-        this.position[1] = random(0, 10);
-        if (GameArea.repeats(this.position)){
-            placeHero();
-        }
-        else {
-            GameArea.reserving(this.position);
-        }
-    }
 
     public String getStatus(){
         return this.status;
@@ -49,20 +41,15 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
         this.name,this.status,this.hp,this.id)); 
     } 
 
-    public double distance(int[] posA,int[] posB) { //
-        return Math.sqrt(Math.pow(posA[0] - posB[0], 2) + Math.pow(posA[1] - posB[1], 2));
-    }
 
     public int[] getPos() {
-       return this.position;
+       return this.position.getPos();
     }
 
     public String showPos(){
-        return ""+this.position[0]+","+this.position[1];
+        return this.position.showPos();
     }
-    // public void move(int setx, int sety) {
-    //     System.out.println("время для новой позиции" + distance(setx, sety) / this.speed);
-    // }
+
 
     @Override
     public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
@@ -99,9 +86,36 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
         result = prime * result + ((status == null) ? 0 : status.hashCode());
         result = prime * result + speed;
         result = prime * result + id;
-        result = prime * result + Arrays.hashCode(position);
+        result = prime * result + Arrays.hashCode(position.getPos());
         result = prime * result + hp;
         return result;
+    }
+
+    /**ближайшая цель  */
+    public BaseHero nearestPoint(BaseHero current,ArrayList<BaseHero> team) {
+        int[] thispos= current.getPos();        
+        LinkedHashMap<Double,Integer> result = new LinkedHashMap<>(team.size());
+        for (BaseHero hero : team) {//добавление растояния
+            if(hero.getStatus().equals("Жив") && (current.getId()!=hero.getId())){ // если персонаж жив и персонаж не является самим собой
+            result.put(this.position.distance(thispos,hero.getPos()),hero.getId());}
+        }
+
+        result.entrySet().stream() //сортировка по растоянию
+        .sorted(Map.Entry.<Double, Integer>comparingByKey())//.reversed())        
+        .forEach(System.out::println); // вывод растояние = id
+        
+        Map.Entry<Double, Integer> minEntry = result.entrySet().stream()// поиск наименьшего ключа
+        .min(Comparator.comparing(Map.Entry::getKey))
+        .orElse(null);
+        result.clear();
+
+        for (BaseHero i : team) {// выбор обьекта по id
+            if(minEntry.getValue()==i.getId()){               
+                System.out.println("ближайший " + i.getId());
+                return i;
+            }
+        }
+        return null;
     }
 
 }
