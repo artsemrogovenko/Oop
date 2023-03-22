@@ -1,31 +1,51 @@
 package Persons;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Random;
+
+import Persons.Console.IconsState;
 /** нейтральный персонаж */
 public abstract class BaseHero implements HeroInterface{ // нейтральный персонаж
-    public static final int[] thishero = null;
+   // public static final int[] thishero = null;
     // например бот или наблюдатель
     protected String name; // имя
     protected String status;// живой, нет , наблюдатель
     protected int speed; // подвижность
     private final int id;
-    protected Positions position;
+    public Positions position;
     private static int count;
     protected int hp;
+    protected String teamColor;
+    protected IconsState iconState;
 
     public BaseHero(String name, String status, int speed) {
         this.name = name;
         this.status = status;
         this.speed = speed;
         count++;
-        this.id = count;
+        this.id = count;       
+        this.iconState=new IconsState(); 
     }
 
+    public void resetIcon(){
+        this.iconState.resState();       
+    }
+
+    public void setIcon(String s, int v){
+        resetIcon();
+        this.iconState=new IconsState(s,v);       
+    }
+
+    public String geticon() {
+        try {
+            return iconState.getState();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public String teamColor(){
+        return this.teamColor;
+    }
 
     public String getStatus(){
         return this.status;
@@ -42,28 +62,20 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
     } 
 
 
-    public int[] getPos() {
-       return this.position.getPos();
-    }
 
-    public String showPos(){
-        return this.position.showPos();
-    }
+    
+    // @Override
+    // public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
+    // }
 
-
-    @Override
-    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
-    }
-
-    @Override
-    public String getinfo() {
-        return "";
-    }
+    // @Override
+    // public String getinfo() {
+    //     return "";
+    // }
 
     public String getName() {
-        return name;
+        return this.name;
     }
-
 
     public int getSpeed() {
         return speed;
@@ -78,44 +90,13 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
         return hp;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((status == null) ? 0 : status.hashCode());
-        result = prime * result + speed;
-        result = prime * result + id;
-        result = prime * result + Arrays.hashCode(position.getPos());
-        result = prime * result + hp;
-        return result;
+    public int[] getPos() {
+        return position.getPos();
     }
 
-    /**ближайшая цель  */
-    public BaseHero nearestPoint(BaseHero current,ArrayList<BaseHero> team) {
-        int[] thispos= current.getPos();        
-        LinkedHashMap<Double,Integer> result = new LinkedHashMap<>(team.size());
-        for (BaseHero hero : team) {//добавление растояния
-            if(hero.getStatus().equals("Жив") && (current.getId()!=hero.getId())){ // если персонаж жив и персонаж не является самим собой
-            result.put(this.position.distance(thispos,hero.getPos()),hero.getId());}
-        }
-
-        result.entrySet().stream() //сортировка по растоянию
-        .sorted(Map.Entry.<Double, Integer>comparingByKey())//.reversed())        
-        .forEach(System.out::println); // вывод растояние = id
-        
-        Map.Entry<Double, Integer> minEntry = result.entrySet().stream()// поиск наименьшего ключа
-        .min(Comparator.comparing(Map.Entry::getKey))
-        .orElse(null);
-        result.clear();
-
-        for (BaseHero i : team) {// выбор обьекта по id
-            if(minEntry.getValue()==i.getId()){               
-                System.out.println("ближайший " + i.getId());
-                return i;
-            }
-        }
-        return null;
+    public String showPos() {
+        return position.showPos();
     }
+
 
 }

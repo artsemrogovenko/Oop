@@ -1,18 +1,21 @@
 package Persons;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+    
 
 public class Impact {
- 
+
     /**ближайшая цель  */
-    public BaseHero nearestPoint(BaseHero current,ArrayList<BaseHero> team) {
+    public BaseHero nearestPoint(BaseHero current, ArrayList<BaseHero> team) {
+
         int[] thispos= current.getPos();        
         LinkedHashMap<Double,Integer> result = new LinkedHashMap<>(team.size());
         for (BaseHero hero : team) {//добавление растояния
-            if(hero.getStatus().equals("Жив") && (current.getId()!=hero.getId())){
-            result.put(distance(thispos,hero.getPos()),hero.getId());}
+            if(hero.getStatus().equals("Жив") && (current.getId()!=hero.getId())){ // если персонаж жив и персонаж не является самим собой
+            result.put(current.position.distance(thispos,hero.getPos()),hero.getId());}
         }
 
         result.entrySet().stream() //сортировка по растоянию
@@ -25,16 +28,11 @@ public class Impact {
         result.clear();
 
         for (BaseHero i : team) {// выбор обьекта по id
-            if(minEntry.getValue()==i.getId()){               
-                System.out.println("ближайший id " + i.getId());
-                return i;
-            }
-        }        
+                if(minEntry.getValue()==i.getId()){
+                    System.out.println("ближайший " + i.getId());
+                    return i;
+                }
+        }
         return null;
     }
-
-    private static double distance(int[] posA,int[] posB) { //
-        return Math.sqrt(Math.pow(posA[0] - posB[0], 2) + Math.pow(posA[1] - posB[1], 2));
-    }
-
 }

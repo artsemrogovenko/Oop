@@ -12,13 +12,15 @@ public class Peasant extends BaseHero {
     protected int attacks;
     private int delivery=1;
     private int power=1;
+  
     
-    public Peasant(String name,int x,int y){
+    public Peasant(String name,int x,int y,String color){
         this(name, 3, "кирка",x,y);
         this.kevlar=1;
         this.hp=1;
         this.maxHp=1;
         this.attacks=1;
+        this.teamColor=color;
         //super.position=new Positions(10);
     }
 
@@ -33,6 +35,13 @@ public class Peasant extends BaseHero {
         super.position=new Positions(x,y);
         }
 
+        public int[] getPos() {
+            return this.position.getPos();
+        }
+
+        public String showPos() {
+            return this.position.showPos();
+        }
 
     public String advinfo(){
         return String.format("%s= здоровье: %d, патроны %d,оружие: %s, броня: %d",
@@ -42,7 +51,7 @@ public class Peasant extends BaseHero {
     }
 
     public void attack(BaseHero target,int value) {
-        //System.out.println(this.name+" атакует "+target.getName());       
+        System.out.println(this.name+" атакует "+target.getName()+" сила урона "+value);       
         ((Peasant) target).getDamage(value);   //враг получает урон
         --this.patrons;
     }
@@ -62,7 +71,9 @@ public class Peasant extends BaseHero {
         super.status = "dead"; 
         super.hp=0;
     }
-
+    public String showAmmo(){
+        return this.ammo;
+    }
 
 @Override
 public String getinfo(){
