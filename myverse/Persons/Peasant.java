@@ -51,9 +51,19 @@ public class Peasant extends BaseHero {
     }
 
     public void attack(BaseHero target,int value) {
-        System.out.println(this.name+" атакует "+target.getName()+" сила урона "+value);       
+        System.out.printf("%s %s атакует %s %s сила урона %d\n",this.getinfo(),this.name,this.getinfo(),target.getName(),value);       
         ((Peasant) target).getDamage(value);   //враг получает урон
         --this.patrons;
+    }
+    
+    @Override
+    public int showPatrons() {
+        return this.patrons;
+    }
+
+    public void move(BaseHero my, BaseHero target, ArrayList<BaseHero> friends) {
+        Move pers = new Move();
+        pers.move(my, target, friends);
     }
 
     protected void getDamage(int damage) {
@@ -62,30 +72,31 @@ public class Peasant extends BaseHero {
         }
          else die(); 
     }
-
-    protected void addHp(int addHp) {
-        this.hp = addHp + this.hp > this.maxHp ? this.maxHp : addHp + this.hp;
+    @Override
+    public void addHp(int addHp) {
+        this.hp = (addHp*-1) + this.hp > this.maxHp ? this.maxHp : (addHp*-1) + this.hp;
     }
 
     protected void die() {
         super.status = "dead"; 
         super.hp=0;
     }
+
     public String showAmmo(){
         return this.ammo;
     }
 
-@Override
-public String getinfo(){
-    return "крестьянин";
-}
+    @Override
+    public String getinfo() {
+        return "крестьянин";
+    }
 
-@Override
-public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
-}
+    @Override
+    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) throws NotAliveExeption {
+    }
 
-@Override
-public int showPower() {
-    return power;
-}
+    @Override
+    public int showPower() {
+        return power;
+    }
 }

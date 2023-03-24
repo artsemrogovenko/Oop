@@ -9,8 +9,6 @@ public class Spearman extends Mercenary {
     public Spearman(String name,int x ,int y,String color) {
         super(name, 4, "копьё",x, y);
         this.kevlar=5;
-        this.hp=10;
-        this.maxHp=10;
         this.attacks=4;
         this.teamColor=color;
     }
@@ -22,7 +20,7 @@ public class Spearman extends Mercenary {
     @Override
     public void attack(BaseHero target, int value) {
      System.out.println(this.name+" кидает копье в " +target.getName()+" сила урона "+value);  
-        super.attack(target, value);
+        super.attack(target, random(1,3));
     }
 
 

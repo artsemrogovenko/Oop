@@ -17,10 +17,10 @@ public class IconsState {
                 state = AnsiColors.GREEN_b + action + value + AnsiColors.GREEN_back + AnsiColors.WHITE_b; // ⚔
                 break;
             case ("♥+"):
-                state = AnsiColors.GREEN_b + action + value + AnsiColors.GREEN_back + AnsiColors.WHITE_b;
+                state = AnsiColors.GREEN_b + action + value + AnsiColors.GREEN_back + AnsiColors.BLACK_b;
                 break;
             case ("♥-"):
-                state = AnsiColors.RED_b + action + value + AnsiColors.RED_back + AnsiColors.WHITE_b; // ♥
+                state = AnsiColors.RED_b + action + value + AnsiColors.RED_back + AnsiColors.BLACK_b; // ♥
                 break;
             case ("☠"):
                 state = String.format(value + AnsiColors.RED_b);// ☠

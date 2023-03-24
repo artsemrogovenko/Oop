@@ -4,38 +4,48 @@ import java.util.ArrayList;
 
 import Persons.BaseHero;
 import Persons.Impact;
+import Persons.NotAliveExeption;
 import Persons.Peasant;
-import Persons.Console.IconsState;
 
 public class Mercenary extends Peasant {
 
-    private static BaseHero hero, hero2;
+    private static BaseHero hero2;
     private Impact targ = new Impact();
-
+   
     public Mercenary(String name, int speed, String ammo, int x, int y) {
         super(name, speed, ammo, x, y);
-        super.hp = 10;
-        super.maxHp = 10;
+        this.hp = 10;
+        this.maxHp = 10;        
     }
 
     @Override
-    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) { // стрелять если жив и есть ли патроны
-        if (super.patrons > 0 && super.status.equals("Жив")) {
-
+    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam)throws NotAliveExeption  { // стрелять если жив и есть ли патроны
+        if (super.status.equals("Жив")) {
+     
             int power = this.showPower();
-            hero2 = targ.nearestPoint(this, enemy);
+                hero2 = targ.nearestPoint(this, enemy);
+ 
+           // System.out.printf("%s с %d %s нашел цель %s \n",
+             //       this.getinfo()+" "+this.getName(), super.patrons,this.showAmmo(), hero2.Info());
 
-            System.out.printf("%s с %d %s нашел цель %s \n",
-                    this.getinfo(),  super.patrons,this.showAmmo(), hero2.Info());
-
-            hero2.setIcon("♥-", power);
-            this.setIcon("⚔-", 1);
-            attack(hero2, power);
-            
+                   
+            if (distance(this.getPos(), hero2.getPos()) <= 1) {
+                hero2.setIcon("♥-", power);
+                this.setIcon("⚔-", 1);
+                attack(hero2, power);
+            }            
+            else{
+                move(this, hero2, myTeam);
+            }
 
         } else {
-            System.out.printf("%s не выстрелит: патроны=%d\n", this.Info(), this.patrons);
+            System.out.printf("%s не нападет\n", this.Info());
         }
 
     }
+
+ 
+
+
+   
 }

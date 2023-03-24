@@ -13,16 +13,11 @@ public class Positions {
             this.y = y;
     }
 
-    public double distance(int[] posA, int[] posB) { //
+    public static double distance(int[] posA, int[] posB) { //
         return Math.sqrt(Math.pow(posA[0] - posB[0], 2) + Math.pow(posA[1] - posB[1], 2));
     }
 
-    // public double distance(int[] posB) { //
-    //     return Math.sqrt(Math.pow(this.x - posB[0], 2) + Math.pow(this.y - posB[1], 2));
-    // }
-
-    
-    public int[] getPos() {
+      public int[] getPos() {
         return new int[] { this.x, this.y };
     }
 
@@ -48,11 +43,6 @@ public class Positions {
         area.add(Arrays.toString(pos));
     }
 
-    private void showlist() {
-        for (int i = 0; i < area.size(); i++) {
-            System.out.println(area.get(i));
-        }
-    }
 
     public void randomPlace(int maxCell) {
         int[] randomPos = { new Random().nextInt(maxCell),
@@ -63,8 +53,6 @@ public class Positions {
             reserving(randomPos);
         }
     }
-
-
 
 
     // public void move(int setx, int sety) {

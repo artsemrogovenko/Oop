@@ -1,5 +1,6 @@
 package Persons;
 
+
 import java.util.Random;
 
 import Persons.Console.IconsState;
@@ -51,27 +52,24 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
         return this.status;
     }
 
-    public int random(int min, int max) {
+    public static int random(int min, int max) {
         Random r = new Random();
         return r.nextInt(max - min) + min;
     }
 
     public String Info() {
-        return(String.format("%s статус-%s hp:%d id:%d",
-        this.name,this.status,this.hp,this.id)); 
+        return(String.format("%s %s hp:%d id:%d",
+        this.name,this.getinfo(),this.hp,this.id));
     } 
 
-
-
-    
     // @Override
     // public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
     // }
 
-    // @Override
-    // public String getinfo() {
-    //     return "";
-    // }
+     @Override
+     public String getinfo() {
+         return "";
+     }
 
     public String getName() {
         return this.name;
@@ -97,6 +95,15 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
     public String showPos() {
         return position.showPos();
     }
+
+    public double distance(int[] thispos, int[] pos) {
+        return Positions.distance(thispos, pos);
+    }
+
+
+    // @Override    
+    // public void addHp(int value) {
+    // }
 
 
 }

@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 import Persons.BaseHero;
 import Persons.Impact;
+import Persons.NotAliveExeption;
 import Persons.Peasant;
-import Persons.Console.IconsState;
+
 
 public class Shooters extends Peasant {
     private Impact targ = new Impact();
@@ -15,31 +16,41 @@ public class Shooters extends Peasant {
     public Shooters(String name, int speed, String ammo, int x, int y) {
         super(name, speed, ammo, x, y);
     }
+    
 
+    
     @Override
-    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) { // стрелять если жив и есть ли патроны
+    public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) throws NotAliveExeption { // стрелять если жив и есть ли патроны
         if (super.patrons > 0 && super.status.equals("Жив")) {
 
             int power = this.showPower();
-            hero2 = targ.nearestPoint(this, enemy);   
+            // try {
+            hero2 = targ.nearestPoint(this, enemy);
+            // } catch (NotAliveExeption e) {
+            // System.out.println("причина"+ e);
+            // return;
+            // }
 
-            hero2.setIcon("♥-", power);            
-            this.setIcon("⚔-", 1);
-            attack(hero2, power);
-
-            int count=0;
-            for (int i = 0; i < myTeam.size(); i++) { // если есть в команде крестьянин, добавить стрелы
-                if (myTeam.get(i).getinfo().equals("крестьянин")) {
-                    ++super.patrons;
-                    System.out.println(this.name+ " пополнил стрелы ");
-                count++;
+            if (super.patrons > 0 && hero2.getStatus().equals("Жив")) {
+                hero2.setIcon("♥-", power);
+                this.setIcon("⚔-", 1);
+                attack(hero2, power);
+                int count = 0;
+                if (super.patrons == 0 && hero2.getStatus().equals("Жив")) {
+                    for (int i = 0; i < myTeam.size(); i++) { // если есть в команде крестьянин, добавить стрелы
+                        if (myTeam.get(i).getinfo().equals("крестьянин")) {
+                            ++super.patrons;
+                            // System.out.println(this.name+ " пополнил стрелы ");
+                            count++;
+                        }
+                    }
+                    if(count>0){
+                    this.setIcon("⚔+", count);} 
                 }
             }
-            this.setIcon("⚔+", count);
-
 
         } else {
-            System.out.printf("%s не выстрелит: патроны=%d\n", this.Info(), this.patrons);
+           // System.out.printf("%s не выстрелит: патроны=%d\n", this.Info(), this.patrons);
         }
     }
 

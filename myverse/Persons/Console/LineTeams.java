@@ -12,17 +12,17 @@ public class LineTeams {
             tA =  teamA.get(line).Info();
         } else {
            
-            tA=String.format("%s %s","☠",teamA.get(line).Info());
+            tA=String.format("%s %s","☠ ",teamA.get(line).Info());
             //tA = AnsiColors.BLACK_back + teamA.get(line).Info();
         }
         if (teamB.get(line).getStatus() == "Жив") {
             tB = teamB.get(line).Info();
         } else {
             
-            tB=String.format("%s%s","☠",teamB.get(line).Info());
+            tB=String.format("%s%s","☠ ",teamB.get(line).Info());
             //tB = AnsiColors.BLACK_back + teamB.get(line).Info();
         }
-        return new String[] {teamA.get(line).geticon(), tA + AnsiColors.RESET, teamB.get(line).geticon(),  tB + AnsiColors.RESET };
+        return new String[] {teamA.get(line).geticon(), tA+teamA.get(line).showPos() + AnsiColors.RESET, teamB.get(line).geticon(),  tB+teamB.get(line).showPos() + AnsiColors.RESET };
 }
 
 
