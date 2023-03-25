@@ -1,12 +1,10 @@
 package Persons;
 
-
 import java.util.Random;
 
 import Persons.Console.IconsState;
 /** нейтральный персонаж */
-public abstract class BaseHero implements HeroInterface{ // нейтральный персонаж
-   // public static final int[] thishero = null;
+public abstract class BaseHero implements HeroInterface{ // нейтральный персонаж    
     // например бот или наблюдатель
     protected String name; // имя
     protected String status;// живой, нет , наблюдатель
@@ -15,6 +13,7 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
     public Positions position;
     private static int count;
     protected int hp;
+    protected int maxHp;
     protected String teamColor;
     protected IconsState iconState;
 
@@ -37,11 +36,7 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
     }
 
     public String geticon() {
-        try {
-            return iconState.getState();
-        } catch (Exception e) {
-            return "";
-        }
+    return iconState.getState();
     }
 
     public String teamColor(){
@@ -62,10 +57,6 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
         this.name,this.getinfo(),this.hp,this.id));
     } 
 
-    // @Override
-    // public void step(ArrayList<BaseHero> enemy, ArrayList<BaseHero> myTeam) {
-    // }
-
      @Override
      public String getinfo() {
          return "";
@@ -82,7 +73,6 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
     public int getId() {
         return id;
     }
-
     
     public int gethp(){
         return hp;
@@ -99,11 +89,6 @@ public abstract class BaseHero implements HeroInterface{ // нейтральны
     public double distance(int[] thispos, int[] pos) {
         return Positions.distance(thispos, pos);
     }
-
-
-    // @Override    
-    // public void addHp(int value) {
-    // }
 
 
 }

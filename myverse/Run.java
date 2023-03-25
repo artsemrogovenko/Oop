@@ -22,113 +22,107 @@ public class Run {
 
     public static void main(String[] args) throws Exception {
 
-    //     System.out.println("\t%-3s\t⚔️ %-3d\t\uD83D\uDEE1 %-3d\t♥️%-3d%%\t☠️%-3d\t ");
+        Scanner sc = new Scanner(System.in);
+        //init(10);
+        init();
+        boolean loop = true;
 
-    Scanner sc = new Scanner(System.in);
-    init();
-    boolean loop= true;
-    
-    while (loop) {
-        ConsoleView.showConsole(step, teamA, teamB);
-        try {
-            next();
-            step++;
-            sc.nextLine();
-        } catch (NoPatronsException e) {
-            System.out.println(e.getMessage()); 
-            throw new NotAliveExeption("Конец игры");
-                   
-        } catch (NotAliveExeption e) {
-            System.out.println(e.getMessage()); 
-            System.out.println("\nПобедила команда " + currentTeam);
-            sc.close();
+        while (loop) {
             ConsoleView.showConsole(step, teamA, teamB);
-            loop=false;
-        }         
-        // System.out.println("Победила команда " + currentTeam);
-        // sc.close();
+            try {
+                next();
+                step++;
+               sc.nextLine();
+            } catch (NoPatronsException e) {
+                System.out.println(e.getMessage());
+                throw new NotAliveExeption("Конец игры");
+
+            } catch (NotAliveExeption e) {
+                System.out.println(e.getMessage());
+                System.out.println("\nПобедила команда " + currentTeam);
+                sc.close();
+                ConsoleView.showConsole(step, teamA, teamB);
+                loop = false;
+            }
+            // System.out.println("Победила команда " + currentTeam);
+            // sc.close();
+        }       
     }
-    }
-    
-   public static void init(){
+
+    public static void init(){
        step = 1;
        currentTeam = "";
     for (int i = 0; i < 10; i++) {
-        switch (new Random().nextInt(6)) {
-            case 0: teamA.add(new Peasant(setNames(),i,0,colorA)); break;
-            case 1: teamA.add(new Sorcerer(setNames(),i,0,colorA)); break;
-            case 2: teamA.add(new Rogue(setNames(),i,0,colorA)); break;
-            case 3: teamA.add(new Sniper(setNames(),i,0,colorA)); break;
-            default : teamA.add(new Spearman(setNames(),i,0,colorA)); break;    
+        switch (new Random().nextInt(8)) {
+            case 3: teamA.add(new Peasant(setNames(),i,0,colorA)); break;
+            case 2: teamA.add(new Sorcerer(setNames(),i,0,colorA)); break;
+            case 1: teamA.add(new Rogue(setNames(),i,0,colorA)); break;
+            case 0: teamA.add(new Sniper(setNames(),i,0,colorA)); break;
+            default : teamA.add(new Spearman(setNames(),i,0,colorA)); break;            
         }
-        switch (new Random().nextInt(6)) {
-            case 0: teamB.add(new Peasant(setNames(),i,9,colorB)); break;
-            case 1: teamB.add(new Spearman(setNames(),i,9,colorB)); break;
-            case 2: teamB.add(new Crossbowman(setNames(),i,9,colorB)); break;
-            case 3: teamB.add(new Monk(setNames(),i,9,colorB)); break;
+        switch (new Random().nextInt(8)) {
+            case 3: teamB.add(new Peasant(setNames(),i,9,colorB)); break;
+            case 2: teamB.add(new Spearman(setNames(),i,9,colorB)); break;
+            case 1: teamB.add(new Crossbowman(setNames(),i,9,colorB)); break;
+            case 0: teamB.add(new Monk(setNames(),i,9,colorB)); break;
             default : teamB.add(new Spearman(setNames(),i,9,colorB)); break;    
         }
     }
 
 }
 
- public static void next() throws Exception{
-     ArrayList<BaseHero> teams = new ArrayList<>();
-     teams.addAll(teamA);
-     teams.addAll(teamB);
+public static void next() throws Exception {
+    LinkedList<BaseHero> teams = new LinkedList<>();
+    teams.addAll(teamA);
+    teams.addAll(teamB);
 
-     teams.sort(new Comparator<BaseHero>() { //сортировать по id ..
+    teams.sort(new Comparator<BaseHero>() { // сортировать по id ..
         @Override
         public int compare(BaseHero b1, BaseHero b2) {
             return (b1.getId() - b2.getId());
         }
     });
 
-     for (BaseHero e : teams) {//сброс значков пепед показом
-         e.resetIcon();
-     }
-
-    for (BaseHero hero: teams)
-     {
-         if (teamA.contains(hero)) {
-             currentTeam = "teamA";
-             teamnotpatrons(teamA);
-             hero.step(teamB, teamA);
-
-            } else {
-                currentTeam = "teamB";
-                teamnotpatrons(teamB);
-                hero.step(teamA, teamB);
-         }
-     }   
-    
-    
-
- }
-
-    public static String setNames() { // генератор имен из enum
-        return HeroNames.values()[new Random().nextInt(HeroNames.values().length)].toString();
-    }
-  
-    public static void teamnotpatrons(ArrayList<BaseHero> team) throws NoPatronsException  {
-        int count = 0;
-        for (BaseHero u : team) {
-            if (u.showPatrons() == 0) {
-                count++;
-            }
-        }
-        if (count == team.size()) {
-            System.out.println();
-           throw new NoPatronsException("У команды "+team.toString()+"нет снарядов");
-        }
+    for (BaseHero e : teams) {// сброс значков
+        e.resetIcon();
     }
 
+    
+    for (BaseHero hero:teams) {
+        if (teamA.contains(hero)) {
+            currentTeam = "Команда А";
+            teamnotpatrons(teamA);
+            hero.step(teamB, teamA);  
+        } else {
+            currentTeam = "Команда Б";
+            teamnotpatrons(teamB);
+            hero.step(teamA, teamB);           
+        }
+    }
 
 }
 
+public static String setNames() { // генератор имен из enum
+    return HeroNames.values()[new Random().nextInt(HeroNames.values().length)].toString();
+}
 
- class NoPatronsException extends Exception {
-    public  NoPatronsException(String str) {
-        super(str);
+public static void teamnotpatrons(ArrayList<BaseHero> team) throws NoPatronsException {
+    int count = 0;
+    for (BaseHero u : team) {
+        if (u.showPatrons() == 0) {
+            count++;
+        }
     }
+    if (count == team.size()) {
+        System.out.println();
+        throw new NoPatronsException("У команды " + team.toString() + "нет снарядов");
+    }
+}
+
+}
+
+class NoPatronsException extends Exception {
+public NoPatronsException(String str) {
+    super(str);
+}
 }

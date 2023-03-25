@@ -4,6 +4,7 @@ package Persons.Console;
 public class IconsState {
 
     private String state;
+
     public IconsState(){
         resState();
     }
@@ -25,15 +26,24 @@ public class IconsState {
             case ("☠"):
                 state = String.format(value + AnsiColors.RED_b);// ☠
                 break;
+            // case ("\uD83D\uDEE1"): //U+26E8 // F0 9F 9B A1 // \uD83D\uDEE1
+            //     state = AnsiColors.RED_b + action + value + AnsiColors.RESET+""; // щит
+            //     break;    
             default:
                 state = AnsiColors.RESET+"";
                 break;
         }
     }
 
+
+    public IconsState(String str) {
+        state = str;
+    }
+
     public String getState() {
         return state;
     }
+
     public void resState(){
         state="";
     }

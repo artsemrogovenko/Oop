@@ -8,6 +8,7 @@ public class Move {
     private static int y;
 
     private static HashMap<String, Boolean> map=new HashMap<>();
+
     public Move() {
         map.put("right", true);
         map.put("left", true);
@@ -56,7 +57,8 @@ public class Move {
                         x++;
                     }
                     break;
-                } else {
+                } 
+                else {
                     if (map.get("up")) {
                         y++;   
                     }
@@ -75,7 +77,8 @@ public class Move {
                         y++;
                     }
                     break;
-                } else {
+                } 
+                else {
                     if (map.get("right")) {
                         x++;                
                     }
@@ -90,10 +93,12 @@ public class Move {
 
     private void checkFilled(ArrayList<BaseHero> team) {       
         for (BaseHero u : team) {
-            if((u.getPos()[0] == x+1) & (u.getPos()[1]  == y)) map.replace("right", false) ;
+            //if(u.getStatus().equals("Жив")){
+            if((u.getPos()[0] == x+1) & (u.getPos()[1]  == y)) map.replace("right", false);
             if((u.getPos()[0] == x-1) & (u.getPos()[1] == y)) map.replace("left", false);
             if((u.getPos()[0]== x) & (u.getPos()[1] == y+1)) map.replace("up", false);
             if((u.getPos()[0] == x) & (u.getPos()[1] == y-1)) map.replace("down", false);
+        //}
         }    
     }
 }

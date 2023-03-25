@@ -8,4 +8,5 @@ public interface HeroInterface {
     int showPower();
     void addHp(int value); 
     int showPatrons();
+  
 }

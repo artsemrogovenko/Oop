@@ -1,7 +1,7 @@
 package Persons.Shooters;
 /** снайпер */
 public class Sniper extends Shooters {
-    private int power=random(8,10);
+    //private int power=random(8,10);
 
 
     public Sniper(String name,int x,int y,String color) {
@@ -10,6 +10,8 @@ public class Sniper extends Shooters {
         super.hp=15;
         super.maxHp=15;
         super.attacks=12;
+        super.minPower=8;
+        super.maxPower=10;
         super.patrons=32;
         super.teamColor=color;
     }
@@ -19,8 +21,8 @@ public class Sniper extends Shooters {
         return "снайпер";
     }
 
-    @Override
-    public int showPower() {
-        return power;
-    }
+    // @Override
+    // public int showPower() {
+    //     return power;
+    // }
 }

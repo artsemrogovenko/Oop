@@ -16,7 +16,7 @@ public class ConsoleView {
         String delimeter = String.join("", Collections.nCopies((teams.size() / 2) * 3, "-"));
 
         StringBuilder table = new StringBuilder();
-        table.append(String.format("\nШаг %d %40s %40s", iter, "команда А", "команда Б\n"));
+        table.append(String.format("\nШаг %d %50s %50s", iter, "команда А", "команда Б\n"));
 
         for (int x = 0; x < 10; x++) { // строки
             empty = true;
@@ -25,8 +25,8 @@ public class ConsoleView {
                 for (int i = 0; i < teams.size(); i++) {// пробежаться по списку на совпадение координат
 
                     if (teams.get(i).position.getPos()[0] == x && teams.get(i).position.getPos()[1] == y) {
-                        if (teams.get(i).getStatus()
-                                .equals("dead")) {
+                        if (teams.get(i).getStatus().equals("dead")) {
+
                             table.append(String.format(AnsiColors.BLACK_b + "%-2d" + AnsiColors.RESET,
                                     teams.get(i).getId()));// нарисовать игрока
                         } else
@@ -45,10 +45,16 @@ public class ConsoleView {
             }
 
             String[] line = LineTeams.showlist(x, teamA, teamB);
-            System.out.printf("%-30s \t%-10s\t%-45s\t%10s\t%s\n", table, line[0], line[1], line[2], line[3]);
-
+            System.out.printf("%s\t   %-1s\t%1s\t\t%1s\t%-1s\n",table,line[0], line[1], line[2], line[3]);
             table.replace(0, table.capacity(), "");
         }
+        System.out.println(delimeter);
+        // for (BaseHero e : teamA) {// сброс значков
+        //     e.resetIcon();
+        // }
+        // for (BaseHero e : teamB) {// сброс значков
+        //     e.resetIcon();
+        // }
 
-    }
+    }   
 }

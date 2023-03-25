@@ -8,11 +8,10 @@ public class Wizards extends Peasant{
     protected static int mana=1;
     protected int power;
     
-    public Wizards(String name,int speed, String ammo,int power,int x,int y) {
+    public Wizards(String name,int speed, String ammo,int x,int y) {
         super(name, speed, ammo, x, y);
         this.hp=30;
         this.maxHp=30;
-        this.power=power;
     }
 
     @Override
@@ -30,8 +29,9 @@ public class Wizards extends Peasant{
         }
         
         private void healed(BaseHero target,int value) {
-            System.out.printf("%s %s лечит %s %s количество %d\n",this.getinfo(),this.name,target.getinfo(),target.getName(),value);       
-            target.addHp(value);   //враг получает урон       
+            System.out.printf("%s %s id:%d лечит %s %s %d количество %d\n",
+            this.getinfo(),this.name,this.getId(),target.getinfo(),target.getName(),target.getId(),value);       
+            target.addHp(value);   //пополняет здоровье      
         }
     
 }

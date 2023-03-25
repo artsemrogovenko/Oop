@@ -60,32 +60,4 @@ public class Positions {
     // this.speed);
     // }
 
-    /**игровое поле  */
-    // public static void showArea(ArrayList<BaseHero> teams) {
-    //     boolean empty=false;      
-    //     String delimeter =String.join("", Collections.nCopies((teams.size()/2)*3, "-"));
-    //     for (int x = 0; x < 10; x++) { //строки
-    //         empty=true;
-    //         //System.out.printf("\n------------------------------\n");            
-    //         System.out.printf("\n%s\n",delimeter);
-    //         for (int y = 0; y < 10; y++) {     //столбцы
-    //             for (int i = 0; i < teams.size(); i++) {//пробежаться по списку на совпадение координат
-                    
-    //                 if (teams.get(i).position.getPos()[0] == x && teams.get(i).position.getPos()[1] == y) {
-    //                     String Backgr=teams.get(i).teamColor();
-    //                     System.out.printf(Backgr+"%-2d"+ AnsiColors.RESET,teams.get(i).getId());//нарисовать игрока
-
-    //                     empty=false;
-    //                 break;
-    //                 }
-    //                 empty=true;                    
-    //             }
-    //              if(empty) System.out.print("  ");{{
-    //              System.out.print("|");}}
-    //         }
-    //     }
-    //     System.out.println();
-    // }
-
-
 }
