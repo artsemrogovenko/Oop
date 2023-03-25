@@ -93,12 +93,12 @@ public class Move {
 
     private void checkFilled(ArrayList<BaseHero> team) {       
         for (BaseHero u : team) {
-            //if(u.getStatus().equals("Жив")){
+        if(u.getStatus().equals("Жив")){
             if((u.getPos()[0] == x+1) & (u.getPos()[1]  == y)) map.replace("right", false);
             if((u.getPos()[0] == x-1) & (u.getPos()[1] == y)) map.replace("left", false);
             if((u.getPos()[0]== x) & (u.getPos()[1] == y+1)) map.replace("up", false);
             if((u.getPos()[0] == x) & (u.getPos()[1] == y-1)) map.replace("down", false);
-        //}
+        }
         }    
     }
 }

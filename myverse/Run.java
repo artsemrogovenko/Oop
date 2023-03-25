@@ -32,7 +32,7 @@ public class Run {
             try {
                 next();
                 step++;
-               sc.nextLine();
+                sc.nextLine();
             } catch (NoPatronsException e) {
                 System.out.println(e.getMessage());
                 throw new NotAliveExeption("Конец игры");
@@ -115,7 +115,7 @@ public static void teamnotpatrons(ArrayList<BaseHero> team) throws NoPatronsExce
     }
     if (count == team.size()) {
         System.out.println();
-        throw new NoPatronsException("У команды " + team.toString() + "нет снарядов");
+        throw new NoPatronsException("У команды " + currentTeam.charAt(currentTeam.length()-1) + " нет снарядов");
     }
 }
 
