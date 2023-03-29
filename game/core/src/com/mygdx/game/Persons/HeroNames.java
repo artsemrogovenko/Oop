@@ -1,0 +1,28 @@
+package com.mygdx.game.Persons;
+
+public enum HeroNames {
+    Alfred,
+    Bill,
+    Brandon,
+    Calvin,
+    Dean,
+    Dustin,
+    Ethan,
+    Harold,
+    Henry,
+    Irving,
+    Jason,
+    Jenssen,
+    Josh,
+    Martin,
+    Nick,
+    Norm,
+    Orin,
+    Pat,
+    Perry,
+    Ron,
+    Shawn,
+    Tim,
+    Will,
+    Wyatt,
+}
